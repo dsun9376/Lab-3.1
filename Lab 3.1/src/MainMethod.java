@@ -1,39 +1,38 @@
+import java.util.Arrays;
+
 //Dustin Sun
 //lab 3.1
 // 2/4/18 last edited
 public class MainMethod {
 	
 	public static void main(String [] args)
-	{
-		/*int [] test1 = {1,5,3,8,2,5,4,10};
-		double [] test2 = {8,4,6,2,10,52.35, 52.564,87,46.234};
-		String [] test3 = {"wow", "omg", "you think this will work?", "nah man no way", "way to be positive", "well let's try it", "did this actually work? amazing.."};
-		*/
-		
+	{   System.out.println("a".compareTo("b"));
+		//Testing arrays
 		int [] test1 = {1, 4, 4, 5, 2, 4, 3, 17, 0};
 		double [] test2 = {1.1, 4.1, 4.2, 5.0, 2.0, 4.0, 3.0, 17.0, 0.0};
 		String [] test3 = {"zebra", "tortilla", "abba", "foo", "bar", "aba"};
 		
 		long start = System.nanoTime();
-		ArrayMethods1.insertionSort(test1);
+		//insertionSort(test1);
 		long end = System.nanoTime();
 		long time = end - start;
 		System.out.println("Test1 took: " + time + "nanoseconds");
-		printArray(test1);
+		System.out.println(Arrays.toString(test1));
 		
 		start = System.nanoTime();
-		ArrayMethods1.selectionSort(test2);
+		//selectionSort(test2);
 		end = System.nanoTime();
 		time = end - start;
 		System.out.println("Test2 took: " + time + "nanoseconds");
-		printArray(test2);
+		System.out.println(Arrays.toString(test2));
 		
 		start = System.nanoTime();
-		ArrayMethods1.bubbleSort(test3);
+		bubbleSort(test3);
+		System.out.println(test3[0].compareTo(test3[1]));
 		end = System.nanoTime();
 		time = end - start;
 		System.out.println("Test3 took: " + time + "nanoseconds");
-		printArray(test3);
+		System.out.println(Arrays.toString(test3));
 	}
 
 	public static void insertionSort(int[] list1) {  
@@ -62,31 +61,66 @@ public class MainMethod {
 	}
 
 	
-	public static void bubbleSort(int arr[], int n)
-    {
-        int i, j, temp;
-        boolean swapped;
-        for (i = 0; i < n - 1; i++) 
-        {
-            swapped = false;
-            for (j = 0; j < n - i - 1; j++) 
-            {
-                if (arr[j] > arr[j + 1]) 
-                {
-                    // swap arr[j] and arr[j+1]
-                    temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                    swapped = true;
-                }
-            }
- 
-            // IF no two elements were 
-            // swapped by inner loop, then break
-            if (swapped == false)
-                break;
-        }
+	public static void bubbleSort(String[] list1)
+    { 
+		while(sorted(list1)) {
+			String x = "";
+			for (int i=0; i<list1.length-1; i++) {
+				int y= i+1;
+				if (list1[i].compareTo(list1[y]) > 0)
+				{
+					Swap(list1, i, i + 1);
+				}
+		}
+	}
+	
+			
+		
+      
+		System.out.println(Arrays.toString(list1));
     }
+	public static void bubbleSort1(String[] list1)
+	{
+		/*int length = list1.length;
+		while (length > 0)
+		{
+			int i = 0;
+			for (int j = i + 1; j < length; j++)
+			{
+				if (list1[i].compareTo(list1[j]) > 0)
+				{
+					swap(list1, j , i);
+				}
+				i = j;
+			}
+			length--;
+		}*/
+		
+		int changeindex = 1;
+		int listlength = list1.length - 1;
+		while (changeindex != 0)
+		{
+			changeindex = 0;
+			for (int i = 0; i < listlength; i++)
+			{
+				if (list1[i].compareTo(list1[i + 1]) > 0)
+				{
+					Swap(list1, i, i + 1);
+					changeindex++;
+				}
+			}
+			listlength--;
+		}
+	}
+	public static boolean sorted(String[] list1) {
+		for(int i=0; i<list1.length-1; i++) {
+			int y= i+1;
+			if(list1[i].compareTo(list1[y])>0) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	public static void Swap(int[] arr, int index1, int index2) {
 		int temp = arr[index1];
